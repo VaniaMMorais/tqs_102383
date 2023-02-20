@@ -14,14 +14,14 @@ public class AppTest
     private TqsStack<String> wordsStack;
 
     @BeforeEach // executa antes de cada teste
-    void setUp() {
+    public void setUp() {
         //wordsStack = new DraftStack<>();
-        wordsStack = new TqsStack<String>();
+        wordsStack = new TqsStack<>();
     }
 
     @AfterEach // executa depois de cada teste
-    void tearDown() {
-        wordsStack = null;
+    public void tearDown() {
+        wordsStack= null;
     }
     /**
      * Rigorous Test :-)
@@ -30,7 +30,7 @@ public class AppTest
     @Test
     public void isEmpty()
     {
-        assertTrue( wordsStack.isEmpty() );
+        assertTrue( wordsStack.isEmpty(), "The stack should be empty" );
     }
 
     @DisplayName(" A stack has size 0 on construction.")
@@ -59,6 +59,7 @@ public class AppTest
         wordsStack.push("a");
         String l="b";
         wordsStack.push(l);
+        
         assertTrue(wordsStack.pop().equals(l), "The pop did not return the last pushed element ('b').");
     }
 
@@ -72,6 +73,47 @@ public class AppTest
 
         assertTrue((wordsStack.peek().equals(l)) && (wordsStack.size().equals(size)), "The peek did not return the last pushed element ('b').");
         
+    }
+
+    @DisplayName(" If the size is n, then after n pops, the stack is empty and has a size 0")
+    @Test
+    public void popN(){
+        wordsStack.push("a");
+        wordsStack.push("b");
+        wordsStack.push("c");
+        wordsStack.push("d");
+
+        //validar se o tamanho do stack ficou igual a 4 e se inseriu corretamente
+        assertEquals(4, wordsStack.size());
+        assertFalse(wordsStack.isEmpty());
+
+        wordsStack.pop();
+        wordsStack.pop();
+        wordsStack.pop();
+        wordsStack.pop();
+        assertTrue(wordsStack.isEmpty(), "TThe stack should be empty after 4 pops, because the size of the stack is 4.");
+    }
+
+
+    @DisplayName("Popping from an empty stack does throw a NoSuchElementException")
+    @Test
+    public void popEmpty(){
+        assertThrows(NoSuchElementException.class, () -> wordsStack.pop(), "Popping from an empty stack should throw a NoSuchElementException");
+    }
+
+    @DisplayName("Peeking into an empty stack does throw a NoSuchElementException")
+    @Test
+    public void peekEmpty(){
+        assertThrows(NoSuchElementException.class, () -> wordsStack.peek(), "Peeking into an empty stack should throw a NoSuchElementException");
+    }
+
+    @DisplayName("For bounded stacks only: pushing onto a full stack does throw an IllegalStateException")
+    @Test
+    public void pushFull(){
+        wordsStack = new TqsStack<String>(2);
+        wordsStack.push("a");
+        wordsStack.push("b");
+        assertThrows(IllegalStateException.class, () -> wordsStack.push("c"), "Pushing onto a full stack should throw an IllegalStateException");
     }
 
 
