@@ -5,9 +5,15 @@ import java.util.NoSuchElementException;
 public class TqsStack<T> {
 
     private LinkedList<T> stack= new LinkedList<T>();
+    private Integer n= null;
 
     public TqsStack() {
         this.stack = new LinkedList<T>();
+    }
+
+    public TqsStack(int n){
+        this.stack = new LinkedList<T>();
+        this.n = n;
     }
 
     public Integer size() {
@@ -15,7 +21,7 @@ public class TqsStack<T> {
     }
 
     public void push(T t) {
-        stack.add(t);
+        stack.addLast(t);
     }
 
     public T pop() {
@@ -28,6 +34,10 @@ public class TqsStack<T> {
 
     public boolean isEmpty() {
         return this.size() == 0;
+    }
+
+    public void clear() {
+        this.stack.clear();
     }
 
 }

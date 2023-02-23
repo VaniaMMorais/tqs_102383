@@ -1,10 +1,16 @@
 package com.example;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.NoSuchElementException;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+//import org.junit.jupiter.api.*;
 
 /**
  * Unit test for simple App.
@@ -20,8 +26,8 @@ public class AppTest
     }
 
     @AfterEach // executa depois de cada teste
-    public void tearDown() {
-        wordsStack= null;
+    public void clear() {
+        wordsStack.clear();
     }
     /**
      * Rigorous Test :-)
@@ -30,13 +36,13 @@ public class AppTest
     @Test
     public void isEmpty()
     {
-        assertTrue( wordsStack.isEmpty(), "The stack should be empty" );
+        assertTrue(wordsStack.isEmpty(), "The stack should be empty" );
     }
 
     @DisplayName(" A stack has size 0 on construction.")
     @Test
     public void size(){
-        assertEquals(0, wordsStack.size(), "The stack does not have size 0 on construction.");
+        assertEquals(Integer.valueOf(0), Integer.valueOf(wordsStack.size()), "The stack does not have size 0 on construction.");
     }
 
     @DisplayName("After n pushes to an empty stack, n > 0, the stack is not empty and its size is n")
@@ -49,7 +55,7 @@ public class AppTest
         wordsStack.push("b");
         wordsStack.push("c");
         wordsStack.push("d");
-        assertEquals(4, wordsStack.size(), "The push a,b,c,d did not increase the size of the stack.");
+        assertEquals(Integer.valueOf(4), Integer.valueOf(wordsStack.size()), "The push a,b,c,d did not increase the size of the stack.");
     }
 
     @DisplayName("If one pushes x then pops, the value popped is x.")
@@ -57,10 +63,9 @@ public class AppTest
     //@Disabled //desliga o teste
     public void pushThanPop(){
         wordsStack.push("a");
-        String l="b";
-        wordsStack.push(l);
         
-        assertTrue(wordsStack.pop().equals(l), "The pop did not return the last pushed element ('b').");
+        //assertTrue( wordsStack.pop().equals("b") );
+        assertEquals("a", wordsStack.pop(), "The pop did not return the last pushed element ('a').");
     }
 
     @DisplayName("If one pushes x then peeks, the value returned is x, but the size stays the same")
@@ -84,14 +89,14 @@ public class AppTest
         wordsStack.push("d");
 
         //validar se o tamanho do stack ficou igual a 4 e se inseriu corretamente
-        assertEquals(4, wordsStack.size());
+        assertEquals(Integer.valueOf(4), Integer.valueOf(wordsStack.size()));
         assertFalse(wordsStack.isEmpty());
 
         wordsStack.pop();
         wordsStack.pop();
         wordsStack.pop();
         wordsStack.pop();
-        assertTrue(wordsStack.isEmpty(), "TThe stack should be empty after 4 pops, because the size of the stack is 4.");
+        assertTrue(wordsStack.isEmpty(), "The stack should be empty after 4 pops, because the size of the stack is 4.");
     }
 
 
