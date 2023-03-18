@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: lab4.AppTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.492 s <<< FAILURE! - in lab4.AppTest
+test{RemoteWebDriver}  Time elapsed: 1.475 s  <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: Failed to resolve parameter [org.openqa.selenium.remote.RemoteWebDriver arg0] in method [void lab4.AppTest.test(org.openqa.selenium.remote.RemoteWebDriver)]: There was an error creating WebDriver object for Chrome
+Caused by: io.github.bonigarcia.wdm.config.WebDriverManagerException: There was an error creating WebDriver object for Chrome
+Caused by: java.lang.RuntimeException: java.io.IOException: com.sun.jna.LastErrorException: [13] Permissão recusada
+Caused by: java.io.IOException: com.sun.jna.LastErrorException: [13] Permissão recusada
+Caused by: com.sun.jna.LastErrorException: [13] Permissão recusada
+

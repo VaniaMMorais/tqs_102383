@@ -1,27 +1,27 @@
 package lab4;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.slf4j.LoggerFactory.getLogger;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.slf4j.Logger;
-
-import io.github.bonigarcia.seljup.SeleniumJupiter;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
+
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import io.github.bonigarcia.seljup.BrowserType;
+import io.github.bonigarcia.seljup.DockerBrowser;
+import io.github.bonigarcia.seljup.SeleniumJupiter;
+
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @ExtendWith(SeleniumJupiter.class)
-public class FirefoxTest {
+public class AppTest {
 
     @Test
-    void test(FirefoxDriver driver) {
+    void test(@DockerBrowser(type = BrowserType.CHROME) RemoteWebDriver driver) {
         driver.get("https://blazedemo.com/");
         driver.manage().window().setSize(new Dimension(1848,1053));
         driver.findElement(By.name("fromPort")).click();
