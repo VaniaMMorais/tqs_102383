@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Qualidade do Ar</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src ="js/javascript.js" defer ></script>
+</head>
+<body>
+	<h1>Qualidade do Ar</h1>
+	<p>Digite o nome de uma cidade:</p>
+	<form>
+		<input type="text" id="city">
+		<button type="button" onclick="getCoord()">Obter Qualidade do Ar</button>
+	</form>
+	<button type="button" onclick="getStats()">Estatisticas</button>
+	<table id="airQualityTable">
+		<thead>
+			<tr>
+				<th>Cidade</th>
+				<th>NO2</th>
+				<th>SO2</th>
+				<th>CO</th>
+				<th>O3</th>
+				<th>PM10</th>
+				<th>AQI*</th>
+			</tr>
+		</thead >
+		<tbody>
+		</tbody>
+	</table>
+	<h1>Cache Statistics</h1>
+    <p>Requests: <span id="requests"></span></p>
+    <p>Cache Hits: <span id="hits"></span></p>
+    <p>Cache Misses: <span id="misses"></span></p>
+    
+
+	<a>*Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.</a>
+</body>
+
+</html>
