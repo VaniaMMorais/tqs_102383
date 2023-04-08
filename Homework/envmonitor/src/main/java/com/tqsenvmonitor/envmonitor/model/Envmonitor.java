@@ -1,6 +1,5 @@
 package com.tqsenvmonitor.envmonitor.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +10,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 
 @Entity
@@ -24,7 +22,7 @@ public class Envmonitor {
     private Double co;
     private Double o3;
     private Double pm10;
-    private Integer aqi; // Air Quality Index (1-5, onde 1 é o melhor)
+    private Double aqi; // Air Quality Index (1-5, onde 1 é o melhor)
     private LocalDateTime expiryTime;
 
     private static final Duration CACHE_TTL = Duration.ofMinutes(30);
@@ -32,7 +30,7 @@ public class Envmonitor {
     public Envmonitor() {
     }
 
-    public Envmonitor(String cityName, Double no2, Double so2, Double co, Double o3, Double pm10, Integer aqi) {
+    public Envmonitor(String cityName, Double no2, Double so2, Double co, Double o3, Double pm10, Double aqi) {
         this.cityName = cityName;
         this.date = LocalDateTime.now();
         this.no2 = no2;
@@ -109,11 +107,11 @@ public class Envmonitor {
         this.pm10 = pm10;
     }
 
-    public Integer getAqi() {
+    public Double getAqi() {
         return aqi;
     }
 
-    public void setAqi(Integer aqi) {
+    public void setAqi(Double aqi) {
         this.aqi = aqi;
     }
 

@@ -10,7 +10,6 @@ import java.util.Map;
 import com.tqsenvmonitor.envmonitor.model.Envmonitor;
 
 public class CacheData {
-    private static final int MAX_CACHE_SIZE = 10000;
     private static final Duration CACHE_TTL = Duration.ofMinutes(30);
     private final Map<String, Envmonitor> cache = new HashMap<>();
     private int requestsCount = 0;
@@ -19,21 +18,15 @@ public class CacheData {
 
     public synchronized Envmonitor getFromCache(String key) {
         Envmonitor envmonitor = cache.get(key);     
-        // if (envmonitor != null && envmonitor.getExpiryTime().isAfter(LocalDateTime.now())) {
-        //     hitsCount++;
-        // } else {
-        //     cache.remove(key);
-        //     envmonitor = null;
-        //     missesCount++;
-        // }
-        // requestsCount++;   
+        System.out.println("Estou a ir à cache");
         return envmonitor;
     }
 
-    // public synchronized Envmonitor existsInCache(String key){
-    //     Envmonitor envmonitor = cache.get(key); 
-    //     return envmonitor;
-    // }
+    public synchronized void putFuture(String key, Envmonitor envmonitor) {
+        envmonitor.setCityName(key);
+        envmonitor.setExpiryTime(LocalDateTime.now().plus(CACHE_TTL));
+        cache.put(key, envmonitor);
+    }
 
     public synchronized void put(String key, Envmonitor envmonitor) {   
         envmonitor.setCityName(key);
