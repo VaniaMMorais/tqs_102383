@@ -1,0 +1,177 @@
+{
+  "id": "f821f580-9f16-4da8-ac68-b8164bb74c9b",
+  "version": "2.0",
+  "name": "Homework",
+  "url": "http://localhost:8082",
+  "tests": [{
+    "id": "87c1ff1e-9c88-49f8-a783-6b9c947c26a0",
+    "name": "envmonitor",
+    "commands": [{
+      "id": "a5dd3092-8011-4aec-b5c6-e786b19a9539",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "11cc3c7d-8a23-43c4-93e7-d50c4140ab83",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1848x1053",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "91ae30e1-6725-4985-9dac-d2878520dca7",
+      "comment": "",
+      "command": "click",
+      "target": "id=city",
+      "targets": [
+        ["id=city", "id"],
+        ["css=#city", "css:finder"],
+        ["xpath=//input[@id='city']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "444a39a9-acdc-4657-9e2c-5e0cc6c5fc93",
+      "comment": "",
+      "command": "type",
+      "target": "id=city",
+      "targets": [
+        ["id=city", "id"],
+        ["css=#city", "css:finder"],
+        ["xpath=//input[@id='city']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Faro"
+    }, {
+      "id": "fef7b894-8f53-4c1e-a2ca-bdad6a594ebd",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Get Air Quality')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dfbd9370-7d07-49dc-bec0-79107a51f7cf",
+      "comment": "",
+      "command": "click",
+      "target": "id=city",
+      "targets": [
+        ["id=city", "id"],
+        ["css=#city", "css:finder"],
+        ["xpath=//input[@id='city']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b23e54f6-2089-42bd-97b5-ad5d5b9aa388",
+      "comment": "",
+      "command": "type",
+      "target": "id=city",
+      "targets": [
+        ["id=city", "id"],
+        ["css=#city", "css:finder"],
+        ["xpath=//input[@id='city']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Porto"
+    }, {
+      "id": "27ac6ac9-eeec-49f1-8b2d-e0a0b5c119fa",
+      "comment": "",
+      "command": "click",
+      "target": "css=form > button:nth-child(3)",
+      "targets": [
+        ["css=form > button:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Get Future Air Quality')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb0f419b-ca92-4811-afac-5c259771481f",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Get Air Quality')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dbcd61a1-affa-49b1-9418-86f6b1b516b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=form",
+      "targets": [
+        ["css=form", "css:finder"],
+        ["xpath=//form", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "21d6dda2-74db-42fb-8e06-1af78505b614",
+      "comment": "",
+      "command": "type",
+      "target": "id=city",
+      "targets": [
+        ["id=city", "id"],
+        ["css=#city", "css:finder"],
+        ["xpath=//input[@id='city']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "cabo"
+    }, {
+      "id": "50c00d29-13a4-496d-a9fe-c8baacf3ddc5",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Get Air Quality')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6fc67fd3-e32e-4fbe-9bfc-2a7125114aa8",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Get Air Quality')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5a85b8dd-f772-40c2-b4db-980a8cc133a7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.statistics > button",
+      "targets": [
+        ["css=.statistics > button", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Statistics')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "7f0d78f2-3bfc-4248-9418-3900a49bdc3c",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["87c1ff1e-9c88-49f8-a783-6b9c947c26a0"]
+  }],
+  "urls": ["http://localhost:8082/"],
+  "plugins": []
+}

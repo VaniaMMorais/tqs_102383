@@ -76,11 +76,17 @@ public class EnvmonitorService {
 
     public List<Double> settingCoords(String response){
         Gson gson = new Gson();
+        System.out.println(response);
         JsonArray jsonArray = gson.fromJson(response, JsonArray.class);
-        JsonObject firstResult = jsonArray.get(0).getAsJsonObject();
-        double lat = firstResult.get("lat").getAsDouble();
-        double lon = firstResult.get("lon").getAsDouble();
-        return List.of(lat, lon);
+        System.out.println(jsonArray);
+        if (jsonArray != null && jsonArray.size() > 0) {
+            JsonObject firstResult = jsonArray.get(0).getAsJsonObject();
+            double lat = firstResult.get("lat").getAsDouble();
+            double lon = firstResult.get("lon").getAsDouble();
+            return List.of(lat, lon);
+        } else{
+            throw new RuntimeException("JSON response does not contain a valid array");
+        }
     }
 
     public List<Double> settingAirData(String response){
