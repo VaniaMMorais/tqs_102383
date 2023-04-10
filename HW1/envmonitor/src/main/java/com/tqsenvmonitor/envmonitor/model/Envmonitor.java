@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import jakarta.persistence.Id;
 
@@ -32,7 +33,7 @@ public class Envmonitor {
 
     public Envmonitor(String cityName, Double no2, Double so2, Double co, Double o3, Double pm10, Double aqi) {
         this.cityName = cityName;
-        this.date = LocalDateTime.now();
+        this.date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         this.no2 = no2;
         this.so2 = so2;
         this.co = co;

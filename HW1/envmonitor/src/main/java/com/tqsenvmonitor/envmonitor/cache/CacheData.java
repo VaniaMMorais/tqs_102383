@@ -2,6 +2,7 @@ package com.tqsenvmonitor.envmonitor.cache;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,14 +25,14 @@ public class CacheData {
 
     public synchronized void putFuture(String key, Envmonitor envmonitor) {
         envmonitor.setCityName(key);
-        envmonitor.setExpiryTime(LocalDateTime.now().plus(CACHE_TTL));
+        envmonitor.setExpiryTime(LocalDateTime.now().plus(CACHE_TTL).truncatedTo(ChronoUnit.SECONDS));
         cache.put(key, envmonitor);
     }
 
     public synchronized void put(String key, Envmonitor envmonitor) {   
         envmonitor.setCityName(key);
-        envmonitor.setDate(LocalDateTime.now());
-        envmonitor.setExpiryTime(LocalDateTime.now().plus(CACHE_TTL));
+        envmonitor.setDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        envmonitor.setExpiryTime(LocalDateTime.now().plus(CACHE_TTL).truncatedTo(ChronoUnit.SECONDS));
         cache.put(key, envmonitor);
     }
 

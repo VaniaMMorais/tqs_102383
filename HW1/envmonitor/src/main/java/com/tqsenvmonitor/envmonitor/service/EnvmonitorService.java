@@ -5,12 +5,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
 import com.tqsenvmonitor.envmonitor.model.Envmonitor;
 import com.tqsenvmonitor.envmonitor.connection.HTTPClient;
 
@@ -21,15 +23,8 @@ public class EnvmonitorService {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-    // public List<Envmonitor> getAllEnvmonitors() {
-    //     return envmonitorRepository.findAll();
-    // }
 
-    // public Envmonitor getEnvmonitorById(long id) {
-    //     return envmonitorRepository.findById(id).get();
-    // }
-
-    public Envmonitor getEnvmonitorByCityName(String cityName) {
+    public Envmonitor getEnvmonitorByCityName(String cityName){
         String response = httpClient.getLocation(cityName, 1);
         List<Double> coords = settingCoords(response);
 
@@ -44,13 +39,13 @@ public class EnvmonitorService {
         envmonitor.setO3(airQuality.get(3));
         envmonitor.setSo2(airQuality.get(4));
         envmonitor.setPm10(airQuality.get(5));
-        envmonitor.setDate(LocalDateTime.now());
+        envmonitor.setDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         System.out.println(envmonitor.toJson());
 
         return envmonitor;
     }
 
-    public List<Envmonitor> getFutureEnvmonitorByCityName(String cityName){
+    public List<Envmonitor> getFutureEnvmonitorByCityName(String cityName) {
         String response = httpClient.getLocation(cityName, 1);
         List<Double> coords = settingCoords(response);
 
@@ -74,31 +69,40 @@ public class EnvmonitorService {
         return envmonitors;
     }
 
+
     public List<Double> settingCoords(String response){
-        Gson gson = new Gson();
-        System.out.println(response);
-        JsonArray jsonArray = gson.fromJson(response, JsonArray.class);
-        System.out.println(jsonArray);
-        if (jsonArray != null && jsonArray.size() > 0) {
-            JsonObject firstResult = jsonArray.get(0).getAsJsonObject();
-            double lat = firstResult.get("lat").getAsDouble();
-            double lon = firstResult.get("lon").getAsDouble();
+            double lat = JsonPath.read(response, "$[0].lat");
+            double lon = JsonPath.read(response, "$[0].lon");
             return List.of(lat, lon);
-        } else{
-            throw new RuntimeException("JSON response does not contain a valid array");
-        }
     }
+
+    // public List<Double> settingAirData(String response){
+    //     Gson gson = new Gson();
+    //     JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
+            
+    //     double aqi = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("main").get("aqi").getAsDouble();
+    //     double co = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("co").getAsDouble();
+    //     double no2 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("no2").getAsDouble();
+    //     double o3 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("o3").getAsDouble();
+    //     double so2 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("so2").getAsDouble();
+    //     double pm10 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("pm10").getAsDouble();
+    //     return List.of(aqi, co, no2, o3, so2, pm10);
+    // }
 
     public List<Double> settingAirData(String response){
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
-            
-        double aqi = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("main").get("aqi").getAsDouble();
-        double co = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("co").getAsDouble();
-        double no2 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("no2").getAsDouble();
-        double o3 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("o3").getAsDouble();
-        double so2 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("so2").getAsDouble();
-        double pm10 = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components").get("pm10").getAsDouble();
+
+        JsonObject main = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("main");
+        JsonObject components = jsonObject.getAsJsonArray("list").get(0).getAsJsonObject().getAsJsonObject("components");
+
+        double aqi = main.get("aqi").getAsDouble();
+        double co = components.get("co").getAsDouble();
+        double no2 = components.get("no2").getAsDouble();
+        double o3 = components.get("o3").getAsDouble();
+        double so2 = components.get("so2").getAsDouble();
+        double pm10 = components.get("pm10").getAsDouble();
+
         return List.of(aqi, co, no2, o3, so2, pm10);
     }
 
@@ -122,6 +126,10 @@ public class EnvmonitorService {
             
         }
         return airQuality;
+    }
+
+    public void setHttpClient(HTTPClient httpClient2) {
+        this.httpClient = httpClient2;
     }
 
 }
